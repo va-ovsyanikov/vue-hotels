@@ -46,10 +46,12 @@ const closeModal = () => isModalVisible.value = false
 
 defineExpose({isModalVisible})
 onMounted(async ()=>{
-const response = await axios.get('DataLists');
-    if(response.status){
+    try {
+        const response = await axios.get('DataLists');
         segments.value = response.data
         showSection(response.data.PaxSegmentList.PaxSegment[0].PaxSegmentID)
+    } catch (error) {
+        console.log(error); 
     }
 })
 
